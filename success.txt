@@ -307,3 +307,7 @@ http://37.123.192.81:1188
 http://142.171.224.118:1188
 http://74.48.163.250:1188
 https://e.nxnow.top
+https://translate.smurl1.asia
+https://api.deeplx.org
+https://deeplx.uid.si/v1
+https://deeplx.mingming.dev
