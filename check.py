@@ -95,7 +95,8 @@ def list_file(input_file, output_file):
     with open(output_file, 'w') as result_file:
         result_file.write(flattened_lines)
 
-asyncio.run(process_urls('input.txt', 'success.txt'))
-list_file('success.txt', 'success_result.txt')
+if __name__ == '__main__':
+    asyncio.run(process_urls('input.txt', 'success.txt'))
+    list_file('success.txt', 'success_result.txt')
 
-print ("all done")
+    print ("all done")
