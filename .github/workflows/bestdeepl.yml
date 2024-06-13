@@ -21,7 +21,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install aiohttp aiofiles
-        
+
+    - name: Check Secret
+      run: |
+        if [ -z "${{ secrets.GIT_USER_NAME }}" ]; then
+          echo "Secret is not set."
+          exit 1
+        else
+          echo "Secret is set."
+        fi
+
     - name: Run script
       run: |
         python check.py
