@@ -28,6 +28,7 @@ jobs:
 
     - name: Commit and push if it's different
       run: |
+        echo push to ${{ secrets.GIT_USER_NAME }}
         git config --local user.email "${{ secrets.GIT_USER_EMAIL }}"
         git config --local user.name "${{ secrets.GIT_USER_NAME }}"
         git add -A
