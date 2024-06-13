@@ -10,7 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
 
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
@@ -35,12 +38,18 @@ jobs:
       run: |
         python check.py
 
-    - name: Commit and push if it's different
+    - name: Commit files
       run: |
         echo push to ${{ secrets.GIT_USER_NAME }}
         git config --local user.email "${{ secrets.GIT_USER_EMAIL }}"
         git config --local user.name "${{ secrets.GIT_USER_NAME }}"
         git add -A
-        git commit --allow-empty -m "Update success_result.txt"
-        git push https://${{ secrets.GH_PAT }}:x-oauth-basic@github.com/${{ secrets.GIT_USER_NAME }}/search_deeplx.git
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GH_PAT }}
+        repository: pcjiang1998/search_deeplx
+        #git commit --allow-empty -m "Update success_result.txt"
+        #git push https://${{ secrets.GH_PAT }}:x-oauth-basic@github.com/${{ secrets.GIT_USER_NAME }}/search_deeplx.git
         
